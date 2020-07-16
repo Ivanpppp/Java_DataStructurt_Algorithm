@@ -32,13 +32,106 @@ public class SingleLinkedListDemo {
 
         //显示列表
         singleLinkedList.list();
+        System.out.println();
+
+        //测试题目，求单链表中的有效节点个数
+        System.out.println("有效的节点个数为 : "+getLength(singleLinkedList.getHead()));
+        System.out.println();
+
+        //测试题目，求单链表中倒数第k个节点
+        System.out.println("倒数第k个节点为");
+        System.out.println("k = 3");
+        //遍历
+        System.out.println("倒数第k个节点为--遍历法");
+        HeroNode res = findIndexNode1(singleLinkedList.getHead() ,3);
+        System.out.println(res);
+        System.out.println();
+        //快慢指针
+        System.out.println("倒数第k个节点为--快慢指针法");
+        HeroNode res2 = findIndexNode2(singleLinkedList.getHead() ,3);
+        System.out.println(res2);
+        System.out.println();
+
     }
+
+    //获取到单链表的节点个数
+    public static int getLength(HeroNode head) {
+        if (head.next == null) {
+            return 0;
+        }
+        HeroNode cur = head.next;
+        int count = 0;
+        while (cur!=null){
+            count+=1;
+            cur = cur.next;
+        }
+        return count;
+    }
+
+    //查找单链表的倒数第k个节点
+    //遍历的解法
+    public static HeroNode findIndexNode1(HeroNode head,int index){
+        if (head == null){
+            return null;
+        }
+        int size = getLength(head);
+        if (index <=0 || index >size){
+            return null;
+        }
+        HeroNode temp = head.next;
+        for (int i = 0; i < size - index; i++) {
+            temp = temp.next;
+        }
+        return temp;
+    }
+    //快慢指针的解法
+    public static HeroNode findIndexNode2(HeroNode head,int index){
+        if (head == null){
+            return null;
+        }
+        HeroNode fast = head.next;
+        HeroNode slow = head.next;
+        for (int i = 0; i < index; i++) {
+            fast = fast.next;
+        }
+        while(fast != null){
+            fast = fast.next;
+            slow = slow.next;
+        }
+        return slow;
+    }
+
+    //单链表的反转（腾讯面试题）
+    public static void reverseList(HeroNode head){
+        if (head.next == null || head.next.next == null){
+            return;
+        }
+        //定义一个辅助的指针
+        HeroNode cur = head.next;
+        HeroNode next = null;//指向当前节点cur的下一个节点
+        HeroNode reverseHead = new HeroNode(0,"","");
+        //遍历原来的链表，并把每个节点取出放在reverseHead的前面
+        while (cur!=null){
+            next = cur.next;        //暂时保存当前节点的下一个节点
+            cur.next = reverseHead.next;        //将cur的下一个节点指向新的链表的最前端
+            reverseHead.next = cur;
+            cur = next;
+        }
+        head.next = reverseHead.next;
+    }
+
 }
+
 
 //定义SingleLinkedList管理heroes
 class SingleLinkedList{
     //先初始化头节点，头节点不能动
     private HeroNode head = new HeroNode(0,"","");
+
+    //返回头节点
+    public HeroNode getHead() {
+        return head;
+    }
 
     //添加节点到单链表
     //思路：当不考虑编号顺序时
@@ -157,6 +250,8 @@ class SingleLinkedList{
             temp.next = temp.next.next;
         }
     }
+
+
 }
 
 //定义heronode，每个heronode对象就是一个节点
