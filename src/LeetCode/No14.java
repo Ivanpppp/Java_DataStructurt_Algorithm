@@ -14,9 +14,6 @@ package LeetCode;
 输入: ["dog","racecar","car"]
 输出: ""
 解释: 输入不存在公共前缀。
-说明:
-
-所有输入只包含小写字母 a-z 。
 
 来源：力扣（LeetCode）
 链接：https://leetcode-cn.com/problems/longest-common-prefix
@@ -24,30 +21,31 @@ package LeetCode;
  */
 public class No14 {
     public static void main(String[] args) {
-
+        String[] arr = {"fff","fss","f23"};
+        String ans = longestCommonPrefix(arr);
+        System.out.println(ans);
     }
-
+    // 按行搜索
     public static String longestCommonPrefix(String[] strs) {
         // 特判
-        if (strs.length == 0){
+        int n = strs.length;
+        if (n == 0){
             return "";
         }
-        // 对于所有的字符串，首先比较第一个字母，再比较第二个字母，以此类推
-        StringBuilder ans = new StringBuilder();
+        // 用一个StringBuffer来存放答案，方便后序的字母的添加
+        StringBuffer ans = new StringBuffer();
         for (int i = 0; i < strs[0].length(); i++) {
-            for (int j = 1; j < strs.length; j++) {
-                char cur = strs[0].charAt(i);
-                if (strs[j].length() < i){
-                    return ans.toString();
-                }
-                if (strs[j].charAt(i) == cur){
-                    continue;
-                }else {
+            // 用一个cur来存放当前的一个字符
+            char cur = strs[0].charAt(i);
+            for (int j = 1; j < n; j++) {
+                // 判断一个终止条件
+                // 如果当前字符串的长度比i小，直接退出
+                // 如果当前字符串的第i个字母和第一行的不匹配，退出
+                if (strs[j].length() <= i || strs[j].charAt(i)!=cur){
                     return ans.toString();
                 }
             }
-            // 如果所有的字符串的第一个字母都一样，ans.append（该字母）
-            ans.append(strs[0].charAt(i));
+            ans.append(cur);
         }
         return ans.toString();
     }
