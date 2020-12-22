@@ -47,7 +47,7 @@ public class No46 {
             if (vis[i] == 1) continue;
             vis[i] = 1;
             path.add(nums[i]);
-            dfs(nums,ans,path,vis);
+            dfs(nums, ans, path, vis);
             vis[i] = 0;
             // 回溯
             path.remove(path.size() - 1);
