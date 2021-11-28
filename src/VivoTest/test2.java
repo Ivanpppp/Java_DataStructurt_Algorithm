@@ -20,7 +20,7 @@ public class test2 {
             if (c2 == c1){
                 continue;
             }else {
-                c2 =
+//                c2 =
             }
 
         }
