@@ -1,5 +1,9 @@
 package LeetCode;
 
+import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /*
@@ -36,13 +40,23 @@ arr 中的所有数字 互不相同 ，且按 严格递增 排序
 链接：https://leetcode-cn.com/problems/k-th-smallest-prime-fraction
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class No738 {
+public class No786 {
 
     public static void main(String[] args) {
 
     }
 
     public int[] kthSmallestPrimeFraction(int[] arr, int k) {
-        
+        if(arr.length == 2) return arr;
+        List<int[]> list = new ArrayList<>();
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = i + 1; j < arr.length; j++) {
+                list.add(new int[]{arr[i],arr[j]});
+            }
+        }
+        // 排序
+        Collections.sort(list,(x,y) -> x[0] * y[1] - x[1] * y[0]);
+
+        return list.get(k-1);
     }
 }
