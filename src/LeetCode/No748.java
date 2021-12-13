@@ -52,14 +52,74 @@ import java.util.Map;
  */
 public class No748 {
     public static void main(String[] args) {
-
+        String[] words = {"suggest","letter","of","husband","easy","education","drug","prevent","writer","old"};
+        System.out.println(shortestCompletingWord("Ah71752",words));
     }
 
     public static String shortestCompletingWord(String licensePlate, String[] words) {
         int[] chr = new int[26]; // 用于存储词频
         for (int i = 0; i < licensePlate.length(); i++) {
-            chr[licensePlate.charAt(i) - 'a']++;
+            if (Character.isLetter(licensePlate.charAt(i))){
+                chr[Character.toLowerCase(licensePlate.charAt(i) )- 'a']++;
+            }
         }
+        // 初始化需要返回的ans的位置
+        int idx = -1;
+        for (int i = 0; i < words.length; i++) {
+            int[] cnt = new int[26];
+            for (int j = 0; j < words[i].length(); j++) {
+                cnt[words[i].charAt(j) - 'a']++;
+            }
+            // 初始化当前单词是否满足条件的标识
+            boolean flag = true;
+            for (int j = 0; j < 26; j++) {
+                if (chr[j] > cnt[j]){
+                    flag = false;
+                    break;
+                }
+            }
+            // 维护idx的值
+            if (flag && (idx <0 || words[i].length() < words[idx].length())) {
+                idx = i;
+            }
+
+            System.out.println(flag + "  " + i + "   " + words[i] + "   " + idx);
+        }
+        return words[idx];
 
     }
 }
+
+/**
+ *         int[] cnt = new int[26];
+ *         for (int i = 0; i < licensePlate.length(); ++i) {
+ *             char ch = licensePlate.charAt(i);
+ *             if (Character.isLetter(ch)) {
+ *                 ++cnt[Character.toLowerCase(ch) - 'a'];
+ *             }
+ *         }
+ *         int idx = -1;
+ *         for (int i = 0; i < words.length; ++i) {
+ *             int[] c = new int[26];
+ *             for (int j = 0; j < words[i].length(); ++j) {
+ *                 char ch = words[i].charAt(j);
+ *                 ++c[ch - 'a'];
+ *             }
+ *             boolean ok = true;
+ *             for (int j = 0; j < 26; ++j) {
+ *                 if (c[j] < cnt[j]) {
+ *                     ok = false;
+ *                     break;
+ *                 }
+ *             }
+ *             if (ok && (idx < 0 || words[i].length() < words[idx].length())) {
+ *                 idx = i;
+ *             }
+ *         }
+ *         return words[idx];
+ *
+ * 作者：LeetCode-Solution
+ * 链接：https://leetcode-cn.com/problems/shortest-completing-word/solution/zui-duan-bu-quan-ci-by-leetcode-solution-35pt/
+ * 来源：力扣（LeetCode）
+ * 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+ */
