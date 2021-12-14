@@ -79,7 +79,7 @@ public class No748 {
                 }
             }
             // 维护idx的值
-            if (flag && (idx <0 || words[i].length() < words[idx].length())) {
+            if (flag && (idx < 0 || words[i].length() < words[idx].length())) {
                 idx = i;
             }
 
