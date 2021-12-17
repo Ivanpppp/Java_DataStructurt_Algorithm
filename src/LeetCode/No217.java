@@ -1,6 +1,7 @@
 package LeetCode;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 /*
@@ -41,6 +42,16 @@ public class No217 {
             if (map.get(nums[i])>1){
                 return true;
             }
+        }
+        return false;
+    }
+
+    public static boolean containsDuplicate2(int[] nums){
+        HashSet set = new HashSet();
+        for (int num :
+                nums) {
+            if (set.contains(num)) return true;
+            set.add(num);
         }
         return false;
     }

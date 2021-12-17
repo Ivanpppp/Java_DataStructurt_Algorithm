@@ -40,6 +40,6 @@ public class No207 {
     }
 
     public static boolean canFinish(int numCourses, int[][] prerequisites) {
-        
+        return false;
     }
 }
