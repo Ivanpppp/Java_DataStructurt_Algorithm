@@ -66,5 +66,6 @@ public class No88 {
         for (int i = 0; i < m+n; i++) {
             nums1[i] = sorted[i];
         }
+
     }
 }
