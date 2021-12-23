@@ -19,7 +19,6 @@ package LeetCode;
  */
 public class No141 {
 
-
       class ListNode {
           int val;
           ListNode next;
