@@ -39,7 +39,6 @@ public class No206 {
         if (head == null || head.next == null){
             return head;
         }
-
         // 开始递归
         ListNode cur = reverseList2(head.next);
         head.next.next = head;
