@@ -44,7 +44,6 @@ public class No94 {
         if (root == null){
             return ans;
         }
-
         // 根据左右根的方法递归
         if (root.left!=null){
             inorderTraversal(root.left);

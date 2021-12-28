@@ -1,9 +1,6 @@
 package LeetCode;
 
-import java.util.Deque;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
+import java.util.*;
 
 /*
 给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串，判断字符串是否有效。
@@ -77,6 +74,29 @@ public class No20 {
             }
         }
         // 如果栈为空，则说明能够全部匹配，否则不能全匹配
+        return stack.isEmpty();
+    }
+    public static boolean isValid2(String s){
+        Map<Character,Character> map = new HashMap<>();
+        map.put(')','(');
+        map.put('}','{');
+        map.put(']','[');
+        char[] arr = s.toCharArray();
+        // 用栈来存储
+        Stack<Character> stack = new Stack<>();
+        for (char c :
+                arr) {
+            // 判断是不是右括号
+            if (map.containsKey(c)){
+                if (stack.isEmpty() || map.get(c) != stack.peek()) {
+                    return false;
+                }
+                // 如果能匹配，顶部元素出栈
+                stack.pop();
+            }else {
+                stack.push(c);
+            }
+        }
         return stack.isEmpty();
     }
 }
