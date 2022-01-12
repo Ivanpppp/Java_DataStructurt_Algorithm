@@ -37,6 +37,59 @@ public class No306 {
 
     }
     public boolean isAdditiveNumber(String num) {
+        // 穷举法 O(n^3)
+        int n = num.length();
+        for (int secondStart = 1; secondStart < n - 1; secondStart++) {
+            if (num.charAt(secondStart) == '0' && secondStart != 1) break;
+            for (int secondEnd = secondStart; secondEnd < n - 1; secondEnd++) {
+                if (num.charAt(secondEnd) == '0' && secondEnd != secondStart) break;
+                if (valid(secondStart,secondEnd,num)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
+    public boolean valid(int secondStart, int secondEnd, String num) {
+        int n = num.length();
+        int firstStart = 0,firstEnd = secondStart - 1;
+        while (secondEnd <= n - 1){
+            String third = StringAdd(firstStart,firstEnd,secondStart,secondEnd,num);
+            int thirdStart = secondEnd + 1;
+            int thirdEnd = secondEnd + third.length();
+            if (thirdEnd >= n || !num.substring(thirdStart,thirdEnd+1).equals(third)){
+                break;
+            }
+            if (thirdEnd == n - 1) {
+                return true;
+            }
+            firstEnd = secondEnd;
+            firstStart = secondStart;
+            secondStart = thirdStart;
+            secondEnd = thirdEnd;
+        }
+        return false;
+    }
+
+    private String StringAdd(int firstStart, int firstEnd, int secondStart, int secondEnd, String num) {
+        StringBuffer stringBuffer = new StringBuffer();
+        int cur = 0,carry = 0;
+        while (firstEnd >= firstStart || secondStart <= secondEnd || carry != 0){
+            cur = carry;
+            if (firstEnd >= firstStart){
+                cur += num.charAt(firstEnd) - '0';
+                firstEnd--;
+            }
+            if (secondEnd >= secondStart){
+                cur += num.charAt(secondEnd) - '0';
+                secondEnd--;
+            }
+            carry = cur / 10;
+            cur %= 10;
+            stringBuffer.append((char) (cur +'0'));
+        }
+        stringBuffer.reverse();
+        return stringBuffer.toString();
     }
 }
