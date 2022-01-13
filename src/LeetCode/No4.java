@@ -31,24 +31,31 @@ nums2 = [3, 4]
 public class No4 {
     // 有问题
     public static double findMedianSortedArrays(int[] nums1, int[] nums2) {
-        // 中位数的位置应为 (nums1.length + nums2.length) / 2
-        int mid = 0;
-        int left = 0;
-        int right = 0;
-        Arrays.sort(nums1);
-        Arrays.sort(nums2);
-        double ans = 0;
-        while(left + right != mid){
-            int t1 = nums1[left];
-            int t2 = nums2[right];
-            ans = (t1 + t2) / 2;
-            if (t1 > t2){
-                right++;
-            }else {
-                left++;
+        // 合并两个数组，找中位数
+        int n = nums1.length;
+        int m = nums2.length;
+        int n1 = 0,n2 = 0,index = 0;
+        int[] nums3 = new int[m+n];
+        while (n1 <= n - 1|| n2 <= m - 1){
+            if (nums1[n1] < nums2[n2]){
+                nums3[index] = nums1[n1];
+                if (n1 < n - 1) {
+                    n1++;
+                }
+            }else if(nums1[n1] >= nums2[n2]){
+                nums3[index] = nums2[n2];
+                if (n2 < m - 1){
+                    n2++;
+                }
             }
+            index++;
         }
-        return ans;
+        if (( n + m )% 2 != 0){
+            return nums3[(n+m)/2];
+        }
+        else {
+            return (nums3[(n+m)/2 - 1] + nums3[(n+m)/2]) / 2;
+        }
     }
 
     public static void main(String[] args) {
