@@ -26,6 +26,7 @@ public class No977 {
     public static void main(String[] args) {
 
     }
+    // 先平方 再排序
     public int[] sortedSquares(int[] A) {
         int n = A.length;
         int[] nums = new int[n];
@@ -34,5 +35,22 @@ public class No977 {
         }
         Arrays.sort(nums);
         return nums;
+    }
+    // 双指针
+    public int[] sortedSquares2(int[] A) {
+        // 分别用两个指针指向开头和末尾，在平方过程中就排序
+        int n = A.length;
+        int[] ans = new int[n];
+        for (int i = 0,pos = n - 1 , j = n - 1; i <= j;) {
+            if (A[i] * A[i] >= A[j] * A[j]){
+                ans[pos] = A[i] * A[i];
+                i++;
+            }else {
+                ans[pos] = A[j] * A[j];
+                j--;
+            }
+            pos--;
+        }
+        return ans;
     }
 }
