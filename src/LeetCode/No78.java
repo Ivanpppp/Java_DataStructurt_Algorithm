@@ -34,6 +34,7 @@ public class No78 {
         int[] nums = {1,2,3};
         List<List<Integer>> ans = new ArrayList<>();
         ans = subsets2(nums);
+
     }
     // 首先可以考虑迭代的方式
     public static List<List<Integer>> subsets(int[] nums) {
@@ -58,12 +59,10 @@ public class No78 {
     }
 
     public static void dfs(List<List<Integer>> ans,List<Integer> temp,int[] nums,int cur){
-        System.out.println("这是目前的temp：" + temp );
         ans.add(new ArrayList<>(temp));
         for (int i = cur; i < nums.length; i++) {
             temp.add(nums[i]);
             dfs(ans,temp,nums,i+1);
-            System.out.println(temp +"这是需要删除的");
             temp.remove(temp.size() - 1);
         }
     }
