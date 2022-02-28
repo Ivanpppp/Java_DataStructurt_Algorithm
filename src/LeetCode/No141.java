@@ -1,5 +1,8 @@
 package LeetCode;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /*
     给定一个链表，判断链表中是否有环。
 
@@ -44,4 +47,17 @@ public class No141 {
         }
         return true;
     }
+
+    public boolean hasCycle2(ListNode head){
+        Set<ListNode> listNodes = new HashSet<>();
+        while(head!=null){
+            if (listNodes.contains(head)){
+                return true;
+            }
+            listNodes.add(head);
+            head = head.next;
+        }
+        return false;
+    }
+
 }
