@@ -59,7 +59,7 @@ public class No15 {
                     continue;
                 }
                 List<Integer> list = new LinkedList<>();
-                while ( j <= third && nums[j]+nums[third] > -a){
+                while ( j < third && nums[j]+nums[third] > -a){
                     third--;
                 }
                 // 如果两个指针重合，退出
@@ -73,8 +73,6 @@ public class No15 {
                     list.add(nums[third]);
                     ans.add(list);
                 }
-
-
             }
         }
         return ans;
