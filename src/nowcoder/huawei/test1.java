@@ -1,6 +1,8 @@
 package nowcoder.huawei;
 
-/*
+import java.util.Scanner;
+
+/**
     输入包括多组测试数据。
 每组输入第一行是两个正整数N和M（0 < N <= 30000,0 < M < 5000）,分别代表学生的数目和操作的数目。
 学生ID编号从1编到N。
@@ -29,4 +31,40 @@ Q 1 5
 9
  */
 public class test1 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        char[] chars1 = scanner.nextLine().replaceAll(" ", "").toCharArray();
+        int n = Character.getNumericValue(chars1[0]);
+        int m = Character.getNumericValue(chars1[1]);
+        System.out.println(n+" "+m);
+        int[] grades = new int[n];
+        String s = scanner.nextLine();
+        char[] cs = s.replaceAll(" ", "").toCharArray();
+        for (int i = 0; i < n; i++) {
+            grades[i] = Character.getNumericValue(cs[i]);
+            System.out.println(grades[i]);
+        }
+        for (int i = 0; i < m; i++) {
+            String temp = scanner.nextLine();
+            temp = temp.replaceAll(" ","");
+            char[] chars = temp.toCharArray();
+            if (chars[0] == 'U'){
+                update(grades,Character.getNumericValue(chars[1]),Character.getNumericValue(chars[2]));
+            }else if (chars[0] == 'Q'){
+                query(grades,Character.getNumericValue(chars[1]),Character.getNumericValue(chars[2]));
+            }
+        }
+    }
+
+    public static void update(int[]grades,int num,int grade){
+        grades[num - 1] = grade;
+    }
+    public static void query(int[] grades,int s,int e){
+        int max = Integer.MIN_VALUE;
+        for (int i = s - 1; i <= e - 1; i++) {
+            max = Math.max(grades[i],max);
+        }
+        System.out.println(max);
+    }
+
 }

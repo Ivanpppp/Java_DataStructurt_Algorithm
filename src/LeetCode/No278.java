@@ -20,6 +20,5 @@ public class No278 {
     }
 
     public static void main(String[] args) {
-
     }
 }
