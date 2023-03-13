@@ -39,6 +39,13 @@ public class No167 {
     public static void main(String[] args) {
 
     }
+
+    /**
+     * 双指针
+     * @param numbers
+     * @param target
+     * @return
+     */
     public static int[] twoSum(int[] numbers, int target) {
         int n = numbers.length;
         int start = 0;
@@ -51,6 +58,29 @@ public class No167 {
                 start++;
             }else {
                 return new int[]{start,end};
+            }
+        }
+        return new int[]{-1,-1};
+    }
+
+    /**
+     * 二分查找
+     * @param numbers
+     * @param target
+     * @return
+     */
+    public int[] twoSum2(int[] numbers, int target) {
+        for (int i = 0; i < numbers.length; i++) {
+            int l = i + 1,r = numbers.length - 1;
+            while (l <= r){
+                int mid = l + (r - l)/2;
+                if (numbers[i] + numbers[mid] == target){
+                    return new int[]{i+1,mid+1};
+                }else if (numbers[i] + numbers[mid] > target){
+                    r = mid - 1;
+                }else {
+                    l = mid + 1;
+                }
             }
         }
         return new int[]{-1,-1};

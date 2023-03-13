@@ -16,20 +16,17 @@ public class No557 {
         System.out.println(s);
     }
     public static String reverseWords(String s) {
-        StringBuffer stringBuffer = new StringBuffer();
         int n = s.length();
+        StringBuffer stringBuffer = new StringBuffer();
         for (int i = 0; i < n; i++) {
-            int start = i;  //标记i的位置
-            while (i < n && s.charAt(i)!=' '){
+            int start = i;
+            while (i<n && s.charAt(i)!=' '){
                 i++;
             }
-            for (int j = i-1; j >= start ; j--) {
+            for (int j = i - 1; j >= start ; j--) {
                 stringBuffer.append(s.charAt(j));
-                if (j==start&&i-1!=n){
-                    stringBuffer.append(' ');
-                }
             }
-
+            stringBuffer.append(" ");
         }
         stringBuffer.deleteCharAt(n);
         return stringBuffer.toString();
