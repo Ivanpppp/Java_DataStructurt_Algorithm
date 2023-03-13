@@ -32,23 +32,28 @@ import java.util.Map;
 public class No290 {
     public static void main(String[] args) {
         String patterns = "abba";
-        String s = "dog cat cat dog";
+        String s = "dog dog dog dog";
         System.out.println(wordPattern(patterns,s));
     }
 
     public static boolean wordPattern(String pattern, String s) {
         Map<Character,String> map = new HashMap<>();
+        Map<String,Character> map2 = new HashMap<>();
         String[] arr = s.split(" ");
+        if (arr.length != pattern.length()) return false;
         for (int i = 0; i < pattern.length(); i++) {
             char cur = pattern.charAt(i);
             String curStr = arr[i];
-            if (!map.containsKey(cur)){
+            if ((!map.containsKey(cur) && map2.containsKey(curStr)) || (map.containsKey(cur) && !map2.containsKey(curStr))) return false;
+            if (!map.containsKey(cur) && !map2.containsKey(curStr)){
                 map.put(cur,curStr);
+                map2.put(curStr,cur);
                 continue;
             }
-            if (!map.get(cur).equals(curStr)){
+            if (!map.get(cur).equals(curStr) || !map2.get(curStr).equals(cur)){
                 return false;
             }
+
 
         }
         return true;
