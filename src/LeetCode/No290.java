@@ -32,7 +32,7 @@ import java.util.Map;
 public class No290 {
     public static void main(String[] args) {
         String patterns = "abba";
-        String s = "dog cat cat dog";
+        String s = "dog dog dog dog";
         System.out.println(wordPattern(patterns,s));
     }
 
