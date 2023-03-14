@@ -35,13 +35,11 @@ public class No49 {
                 strs) {
             char[] arr = str.toCharArray();
             Arrays.sort(arr);
-            String new_str = new String(arr);
-            List<String> list = map.getOrDefault(new_str,new ArrayList<>());
+            String newStr = new String(arr);
+            List<String> list = map.getOrDefault(newStr, new ArrayList<>());
             list.add(str);
-            map.put(new_str,list);
-
+            map.put(newStr,list);
         }
         return new ArrayList<List<String>>(map.values());
-
     }
 }
