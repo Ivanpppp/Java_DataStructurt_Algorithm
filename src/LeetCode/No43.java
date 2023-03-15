@@ -1,27 +1,39 @@
 package LeetCode;
 
 public class No43 {
-    public String multiply(String num1, String num2) {
-        if (num2.equals("0") || num1.equals("0")) {
+    public static String multiply(String num1, String num2) {
+        if (num1.equals("0") || num2.equals("0")) {
             return "0";
         }
-        StringBuffer sb = new StringBuffer();
-        for (int i = 0; i < num1.length(); i++) {
-            int cur = num1.charAt(i) - '0';
-            StringBuffer curStr = new StringBuffer();
-            for (int j = 0; j < num2.length(); j++) {
-                int curNum2 = num2.charAt(j) - '0';
-                int sum = curNum2 * cur;
-                
+        String ans = "0";
+        int m = num1.length(), n = num2.length();
+        for (int i = n - 1; i >= 0; i--) {
+            StringBuffer curr = new StringBuffer();
+            int add = 0;
+            for (int j = n - 1; j > i; j--) {
+                curr.append(0);
             }
+            int y = num2.charAt(i) - '0';
+            for (int j = m - 1; j >= 0; j--) {
+                int x = num1.charAt(j) - '0';
+                int product = x * y + add;
+                curr.append(product % 10);
+                add = product / 10;
+            }
+            if (add != 0) {
+                curr.append(add % 10);
+            }
+            ans = sumString(ans, curr.reverse().toString());
         }
+        return ans;
+
     }
 
     public static String sumString(String a, String b) {
         StringBuffer sb = new StringBuffer();
         int i = a.length() - 1, j = b.length() - 1;
         int add = 0;
-        while (i >= 0 || j >= 0) {
+        while (i >= 0 || j >= 0 || add != 0) {
             int c1 = i >= 0 ? a.charAt(i) - '0' : 0;
             int c2 = j >= 0 ? b.charAt(j) - '0' : 0;
             int sum = c1 + c2 + add;
@@ -34,6 +46,6 @@ public class No43 {
     }
 
     public static void main(String[] args) {
-        System.out.println(sumString("123", "123"));
+        System.out.println(multiply("100", "100"));
     }
 }
