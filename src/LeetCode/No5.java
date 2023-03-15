@@ -32,7 +32,7 @@ public class No5 {
 
         int maxLen = 1; // 结果
         int begin = 0;
-        // 用dp[i][i]来表示i到j的字串是否为回文串
+        // 用dp[i][j]来表示i到j的字串是否为回文串
         boolean[][] dp = new boolean[n][n];
         char[] arr = s.toCharArray();
         

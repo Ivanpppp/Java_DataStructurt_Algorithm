@@ -1,7 +1,7 @@
 package LeetCode;
 
 public class No43 {
-    public static String multiply(String num1, String num2) {
+    public String multiply(String num1, String num2) {
         if (num1.equals("0") || num2.equals("0")) {
             return "0";
         }
@@ -23,29 +23,27 @@ public class No43 {
             if (add != 0) {
                 curr.append(add % 10);
             }
-            ans = sumString(ans, curr.reverse().toString());
+            ans = addStrings(ans, curr.reverse().toString());
         }
         return ans;
 
     }
-
-    public static String sumString(String a, String b) {
-        StringBuffer sb = new StringBuffer();
-        int i = a.length() - 1, j = b.length() - 1;
-        int add = 0;
+    public String addStrings(String num1, String num2) {
+        int i = num1.length() - 1, j = num2.length() - 1, add = 0;
+        StringBuffer ans = new StringBuffer();
         while (i >= 0 || j >= 0 || add != 0) {
-            int c1 = i >= 0 ? a.charAt(i) - '0' : 0;
-            int c2 = j >= 0 ? b.charAt(j) - '0' : 0;
-            int sum = c1 + c2 + add;
-            sb.append(sum % 10);
-            add = sum / 10;
+            int x = i >= 0 ? num1.charAt(i) - '0' : 0;
+            int y = j >= 0 ? num2.charAt(j) - '0' : 0;
+            int result = x + y + add;
+            ans.append(result % 10);
+            add = result / 10;
             i--;
             j--;
         }
-        return sb.reverse().toString();
+        ans.reverse();
+        return ans.toString();
     }
-
     public static void main(String[] args) {
-        System.out.println(multiply("100", "100"));
+
     }
 }
