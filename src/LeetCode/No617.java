@@ -28,14 +28,6 @@ package LeetCode;
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class No617 {
-    public class TreeNode{
-        int val;
-        TreeNode left;
-        TreeNode right;
-        TreeNode(int x){
-            val = x;
-        }
-    }
     public TreeNode mergeTrees(TreeNode t1, TreeNode t2) {
         if (t1 == null){
             return t2;

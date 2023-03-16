@@ -31,28 +31,21 @@ public class No116 {
     }
     public Node connect(Node root){
         // 层序遍历
-        if (root == null){
-            return root;
-        }
-
+        if (root == null) return null;
         Queue<Node> queue = new LinkedList<>();
         queue.offer(root);
         while (!queue.isEmpty()){
-            int size = queue.size();
-            for (int i = 0; i < size; i++) {
-                Node cur = queue.poll();
-
-                if (i < size - 1){
-                    // 先进先出，取出的cur如果不是当前的最后的元素，则指向当前的头部元素即可
-                    cur.next = queue.peek();
+            int len = queue.size();
+            for (int i = 0; i < len; i++) {
+                Node poll = queue.poll();
+                if (i < len - 1){
+                    poll.next = queue.peek();
                 }
-
-                if (cur.left != null){
-                    queue.offer(cur.left);
+                if (poll.left!=null){
+                    queue.offer(poll.left);
                 }
-
-                if (cur.right != null){
-                    queue.offer(cur.right);
+                if (poll.right!=null){
+                    queue.offer(poll.right);
                 }
             }
         }
