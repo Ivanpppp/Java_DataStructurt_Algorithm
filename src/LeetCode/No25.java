@@ -20,9 +20,6 @@ public class No25 {
                 // 如果end已经为空，退出
                 if (end == null) return dummy.next;
             }
-
-
-
             // 开始进行翻转
             ListNode start = pre.next;
             ListNode next = end.next;

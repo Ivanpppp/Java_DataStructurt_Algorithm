@@ -31,25 +31,26 @@ public class No46 {
         System.out.println(ans);
     }
     public static List<List<Integer>> permute(int[] nums){
-        List<List<Integer>> ans = new LinkedList<>();
-        List<Integer> path = new LinkedList<>();
+        List<List<Integer>> ans = new ArrayList<>();
+        List<Integer> path = new ArrayList<>();
         int[] vis = new int[nums.length];
         dfs(nums,ans,path,vis);
         return ans;
     }
 
     private static void dfs(int[] nums,List<List<Integer>> ans, List<Integer> path,int[] vis) {
-        if ( path.size() == nums.length){
+        if (path.size() == nums.length){
             ans.add(new ArrayList<>(path));
             return;
         }
         for (int i = 0; i < nums.length; i++) {
-            if (vis[i] == 1) continue;
+            if (vis[i] == 1){
+                continue;
+            }
             vis[i] = 1;
             path.add(nums[i]);
-            dfs(nums, ans, path, vis);
+            dfs(nums,ans,path,vis);
             vis[i] = 0;
-            // 回溯
             path.remove(path.size() - 1);
         }
     }
